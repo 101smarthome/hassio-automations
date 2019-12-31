@@ -1,0 +1,29 @@
+# Example automations.yaml entry
+- id: sun1  # <-- Required for editor to work.
+  alias: Sun state change
+  trigger:
+  - platform: state
+    entity_id: sun.sun
+    #from: below_horizon
+    #to: above_horizon
+#  condition:
+#  - condition: numeric_state
+#    entity_id: sensor.temperature
+#    above: 17
+#    below: 25
+#    value_template: '{{ float(state.state) + 2 }}'
+  action:
+    service: light.turn_on
+
+# play music  in morning
+- id: morning1
+  alias: music play in morning
+  trigger:
+  - platform: time #to schedule time based event
+    at: 07:40:00
+  action:
+    service: media_player.play_media
+    data:
+        entity_id: media_player.family_room_speaker
+        media_content_id: http://192.xxx.x.xx:8123/local/xxxxxx.mp3
+        media_content_type: music
